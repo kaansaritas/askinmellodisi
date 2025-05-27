@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>❤️ Aşkın Melodisi ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom right, #ffe4ec, #ffd1dc);
+            color: #333;
+            text-align: center;
+        }
+        #password-screen {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #fff0f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .gallery img {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+        .quiz-container {
+            margin-top: 40px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .quiz-container h3 { margin-bottom: 10px; }
+        .quiz-container button {
+            background: #ff5e95;
+            border: none;
+            padding: 10px 15px;
+            color: white;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 20px;
+            padding: 20px;
+            background-color: #ffe4ec;
+            border-top: 1px solid #ffb6c1;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-screen">
+        <h2>❤️ Aşkın Melodisi ❤️</h2>
+        <p>Şifreyi giriniz:</p>
+        <input type="password" id="pass" placeholder="16.08.2024">
+        <button onclick="checkPassword()">Giriş</button>
+    </div>
+
+    <audio autoplay loop>
+        <source src="AskinMelodisi.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1 style="margin-top: 20px;">Kaan & Büşra'nın Anıları 📸</h1>
+    <div class="gallery" id="gallery"></div>
+
+    <div class="lightbox" id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <div class="quiz-container">
+        <h3>Büşra'cığım, bakalım beni ne kadar iyi tanıyorsun 😄</h3>
+        <p>En sevdiğim tatlı hangisi?</p>
+        <button onclick="quizAnswer(true)">Sütlaç</button>
+        <button onclick="quizAnswer(false)">Tiramisu</button>
+        <button onclick="quizAnswer(false)">Profiterol</button>
+        <p id="quiz-feedback"></p>
+    </div>
+
+    <footer>
+        ❤️ Canım sevgilim Büşra, seninle her gün bir melodinin en güzel notası gibi... Seni çok seviyorum! ❤️
+    </footer>
+
+<script>
+    const correctPassword = "16.08.2024";
+    function checkPassword() {
+        const input = document.getElementById("pass").value;
+        if (input === correctPassword) {
+            document.getElementById("password-screen").style.display = "none";
+        } else {
+            alert("Yanlış şifre 😢");
+        }
+    }
+
+    const gallery = document.getElementById("gallery");
+    for (let i = 1; i <= 26; i++) {
+        const img = document.createElement("img");
+        img.src = "foto" + i + ".jpg";
+        img.alt = "Foto " + i;
+        img.onclick = () => {
+            document.getElementById("lightbox-img").src = img.src;
+            document.getElementById("lightbox").style.display = "flex";
+        };
+        gallery.appendChild(img);
+    }
+
+    function quizAnswer(correct) {
+        const feedback = document.getElementById("quiz-feedback");
+        if (correct) {
+            feedback.textContent = "Doğru cevap! 💖 Beni tanıyorsun 😍";
+        } else {
+            feedback.textContent = "Hmm, tekrar düşün bakalım 🙈";
+        }
+    }
+</script>
+</body>
+</html>
